@@ -10,12 +10,15 @@ function Player:init(x, y, speed)
 
     self:setCollideRect(0, 0, self:getSize())
     self:setGroups(paddle_coll_group)
-    self:setCollidesWithGroups({bound_coll_group})
+    self:setCollidesWithGroups({bound_coll_group, puck_coll_group})
     self.speed = speed
     self:moveTo(x,y)
     self:add()
 end
 
+function Player:collisionResponse()
+    return "bounce"
+end
 
 function Player:update()
     if pd.buttonIsPressed(pd.kButtonUp) then
